@@ -1,6 +1,6 @@
 # HMIP Multicast Relay Add-on
 
-Relays multicast traffic for Homematic IP devices (HMIPW-DRAP, HMIP-HAP) between the physical host network and Docker container networks (e.g. for OpenCCU).
+Relays multicast traffic for Homematic IP devices (HMIPW-DRAP, HMIP-HAP) between the physical host network and Docker container networks.
 
 > **Beta:** This add-on was developed and tested on a Home Assistant Green. The Docker image is currently built locally by the Supervisor — there is no pre-built image available yet.
 
