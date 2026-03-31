@@ -15,7 +15,7 @@ backup: hot
 map:
   - data:/storage
 environment:
-  - PHP_TIMEZONE: Europe/Berlin
+  PHP_TIMEZONE: Europe/Berlin
 url: https://hub.docker.com/r/dokuwiki/dokuwiki/tags?ordering=name
 #ports:
 #  8000/tcp: 8080
