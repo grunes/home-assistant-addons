@@ -29,3 +29,7 @@ This add-on runs a Python-based multicast relay with `host_network: true` and `N
 - This add-on is intended as an alternative, potentially more stable solution to the [HMIPHAP/HMIPWDRAP support patch](https://github.com/OpenCCU/OpenCCU/wiki/Installation-HomeAssistant#hmiphaphmipwdrap-support-patch), but it still needs sufficient real-world testing.
 - If both this add-on and OpenCCU use `host_network: true`, no relay is needed — they share the host network stack and multicast works natively. In that case this add-on is only needed if OpenCCU runs on a bridge network.
 - The `multicast_groups` list should include the specific multicast addresses used by your HMIP devices. The defaults cover HMIP-HAP and HMIPW-DRAP discovery. You may need to capture traffic with `tcpdump -i eth0 -n multicast` to identify additional groups your devices use.
+
+---
+
+**Note:** This is a community add-on and has no official affiliation with the OpenCCU developers.

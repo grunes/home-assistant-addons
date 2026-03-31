@@ -29,3 +29,7 @@ Current Open Speedtest image tags can be found on Docker Hub:
 ## Notes
 
 - Keep the add-on updated to receive new Open Speedtest releases.
+
+---
+
+**Note:** This is a community add-on and has no official affiliation with the Open Speedtest developers.
