@@ -10,7 +10,6 @@ slug: dokuwiki
 init: false
 ingress: true
 ingress_port: 8080
-ingress_entry: /
 ingress_stream: false
 panel_title: DokuWiki
 panel_icon: mdi:book-open-page-variant
@@ -18,9 +17,9 @@ backup: hot
 map:
   - type: data
     path: /storage
-  - type: addon_config
-    path: /var/www/html/conf
-    read_only: false
+#  - type: addon_config
+#    path: /var/www/html/conf
+#    read_only: false
 environment:
   PHP_TIMEZONE: Europe/Berlin
 url: https://hub.docker.com/r/dokuwiki/dokuwiki/tags?ordering=name
