@@ -1,6 +1,6 @@
-# Example Home Assistant app repository
+# Home Assistant app repository by grunix
 
-This repository can be used as a "blueprint" for app development to help you get started.
+This repository contanins multiple apps I have created for my HA-Green.
 
 Apps documentation: <https://developers.home-assistant.io/docs/apps>
 
