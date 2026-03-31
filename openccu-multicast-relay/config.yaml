@@ -1,5 +1,5 @@
 name: "OpenCCU Multicast Relay"
-version: "1.3.13"
+version: "1.3.14"
 slug: "openccu-multicast-relay"
 description: "relays Homematic IP HAP and Homematic IPW DRAP link-local multicast between newtork and OpenCCU app instance"
 url: "https://github.com/grunes/home-assistant-addons/openccu-multicast-relay"
