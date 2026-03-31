@@ -16,6 +16,7 @@ panel_icon: mdi:book-open-page-variant
 backup: hot
 map:
   - data:/storage
+  - addon_config:/var/www/html/conf
 environment:
   PHP_TIMEZONE: Europe/Berlin
 url: https://hub.docker.com/r/dokuwiki/dokuwiki/tags?ordering=name
