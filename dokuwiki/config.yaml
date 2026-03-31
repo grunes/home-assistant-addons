@@ -5,6 +5,7 @@ arch:
 description: The OpenSource Wiki Software on your Home Assistant
 image: docker.io/dokuwiki/dokuwiki
 version: 2025-05-14b
+stage: experimental
 slug: dokuwiki
 init: false
 ingress: true
@@ -15,8 +16,11 @@ panel_title: DokuWiki
 panel_icon: mdi:book-open-page-variant
 backup: hot
 map:
-  - data:/storage
-  - addon_config:/var/www/html/conf
+  - type: data
+    path: /storage
+  - type: addon_config
+    path: /var/www/html/conf
+    read_only: false
 environment:
   PHP_TIMEZONE: Europe/Berlin
 url: https://hub.docker.com/r/dokuwiki/dokuwiki/tags?ordering=name
