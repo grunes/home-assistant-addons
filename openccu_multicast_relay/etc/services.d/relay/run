@@ -1,0 +1,105 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# HMIP Multicast Relay Add-on
+# ==============================================================================
+
+set -e
+
+LOG_LEVEL=$(bashio::config 'log_level')
+SOURCE_IFACE=$(bashio::config 'source_interface')
+TARGET_IFACE=$(bashio::config 'target_interface')
+
+bashio::log.info "HMIP Multicast Relay starting..."
+
+# --------------------------------------------------------------------------
+# Auto-detect source interface
+# --------------------------------------------------------------------------
+if [ -z "${SOURCE_IFACE}" ]; then
+    SOURCE_IFACE=$(ip route show default 2>/dev/null | awk 'NR==1{print $5}')
+    if [ -z "${SOURCE_IFACE}" ]; then
+        bashio::log.error "No source interface found. Set 'source_interface'."
+        sleep 10
+        exit 1
+    fi
+fi
+
+SOURCE_IP=$(ip -4 addr show "${SOURCE_IFACE}" | awk '/inet /{print $2}' | cut -d/ -f1 | head -1)
+if [ -z "${SOURCE_IP}" ]; then
+    bashio::log.error "No IPv4 address on ${SOURCE_IFACE}"
+    sleep 10
+    exit 1
+fi
+
+# --------------------------------------------------------------------------
+# Auto-detect target interface
+# --------------------------------------------------------------------------
+if [ -z "${TARGET_IFACE}" ]; then
+    if ip link show hassio > /dev/null 2>&1; then
+        TARGET_IFACE="hassio"
+    elif ip link show docker0 > /dev/null 2>&1; then
+        TARGET_IFACE="docker0"
+    else
+        bashio::log.error "No target interface found. Set 'target_interface'."
+        sleep 10
+        exit 1
+    fi
+fi
+
+TARGET_IP=$(ip -4 addr show "${TARGET_IFACE}" | awk '/inet /{print $2}' | cut -d/ -f1 | head -1)
+if [ -z "${TARGET_IP}" ]; then
+    bashio::log.error "No IPv4 address on ${TARGET_IFACE}"
+    sleep 10
+    exit 1
+fi
+
+bashio::log.info "Source: ${SOURCE_IFACE} (${SOURCE_IP})"
+bashio::log.info "Target: ${TARGET_IFACE} (${TARGET_IP})"
+
+# --------------------------------------------------------------------------
+# Disable IGMP snooping on the target bridge
+# --------------------------------------------------------------------------
+if ip link show type bridge "${TARGET_IFACE}" > /dev/null 2>&1; then
+    ip link set dev "${TARGET_IFACE}" type bridge mcast_snooping 0 \
+        && bashio::log.info "Disabled IGMP snooping on ${TARGET_IFACE}" \
+        || bashio::log.warning "Could not disable IGMP snooping on ${TARGET_IFACE}"
+else
+    bashio::log.warning "${TARGET_IFACE} is not a bridge - skipping snooping config"
+fi
+
+# --------------------------------------------------------------------------
+# Enable multicast on both interfaces
+# --------------------------------------------------------------------------
+ip link set "${SOURCE_IFACE}" multicast on 2>/dev/null || true
+ip link set "${TARGET_IFACE}" multicast on 2>/dev/null || true
+
+# --------------------------------------------------------------------------
+# Start Python relay for each group:port entry
+# Format: "GROUP:PORT" e.g. "224.0.0.120:43438"
+# --------------------------------------------------------------------------
+PIDS=""
+for ENTRY in $(bashio::jq "/data/options.json" '.multicast_groups[]'); do
+    GROUP="${ENTRY%%:*}"
+    PORT="${ENTRY##*:}"
+
+    if [ -z "${GROUP}" ] || [ -z "${PORT}" ] || [ "${GROUP}" = "${PORT}" ]; then
+        bashio::log.error "Invalid entry '${ENTRY}' - expected format GROUP:PORT"
+        continue
+    fi
+
+    bashio::log.info "Starting relay for ${GROUP}:${PORT}"
+    python3 /usr/local/bin/hmip-relay.py \
+        "${GROUP}" "${PORT}" "${SOURCE_IP}" "${TARGET_IP}" "${LOG_LEVEL}" &
+    PIDS="${PIDS} $!"
+done
+
+if [ -z "${PIDS}" ]; then
+    bashio::log.error "No valid relay groups configured!"
+    sleep 60
+    exit 1
+fi
+
+bashio::log.info "All relays running."
+
+wait -n ${PIDS} 2>/dev/null || wait ${PIDS}
+bashio::log.error "A relay process exited unexpectedly."
+exit 1

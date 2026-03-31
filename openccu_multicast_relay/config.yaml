@@ -1,0 +1,29 @@
+name: "OpenCCU Multicast Relay"
+version: "1.3.12"
+slug: "openccu_multicast_relay"
+description: "Relays Homematic IP(w) link-local multicast between host and Docker networks"
+url: "https://github.com/grunes/home-assistant-addons/openccu-multicast-relay"
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - i386
+init: false
+startup: system
+boot: auto
+host_network: true
+privileged:
+  - NET_ADMIN
+options:
+  multicast_groups:
+    - "224.0.0.120:43438"
+    - "224.0.0.1:43439"
+  source_interface: ""
+  target_interface: ""
+  log_level: "info"
+schema:
+  multicast_groups:
+    - str
+  source_interface: "str?"
+  target_interface: "str?"
+  log_level: "list(debug|info|warning|error)"

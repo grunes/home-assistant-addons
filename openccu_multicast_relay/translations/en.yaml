@@ -1,0 +1,29 @@
+configuration:
+  multicast_groups:
+    name: Multicast Groups
+    description: >-
+      List of multicast group addresses to relay. Defaults include mDNS
+      (224.0.0.251), LLMNR (224.0.0.252), and SSDP/UPnP (239.255.255.250).
+      Add Homematic IP specific groups as needed.
+  relay_interfaces:
+    name: Additional Relay Interfaces
+    description: >-
+      Additional network interfaces to relay multicast traffic to/from.
+      Leave empty if you only need relay between the source and target
+      interface.
+  source_interface:
+    name: Source Interface
+    description: >-
+      The physical network interface where HMIPW-DRAP / HMIP-HAP multicast
+      traffic arrives. Leave empty for auto-detection (interface with
+      default route).
+  target_interface:
+    name: Target Interface
+    description: >-
+      The Docker bridge interface where OpenCCU runs. Leave empty for
+      auto-detection (tries 'hassio' then 'docker0').
+  log_level:
+    name: Log Level
+    description: >-
+      Log verbosity. Set to 'debug' to see the generated smcroute
+      configuration and individual routed packets.
