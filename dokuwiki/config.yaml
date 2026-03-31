@@ -9,7 +9,7 @@ slug: dokuwiki
 init: false
 ingress: true
 ingress_port: 8080
-ingress_entry: /
+ingress_entry: /ead0423c_dokuwiki
 ingress_stream: false
 panel_title: DokuWiki
 panel_icon: mdi:book-open-page-variant
