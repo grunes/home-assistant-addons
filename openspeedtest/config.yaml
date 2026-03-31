@@ -1,0 +1,17 @@
+name: OpenSpeedTest
+arch:
+- aarch64
+- amd64
+description: Broadband Speed Test That Works on Any Web Browser.
+image: ddocker.io/openspeedtest/latest:v2.0.6
+version: v2.0.6
+url: https://github.com/openspeedtest/Speed-Test
+webui: http://[HOST]:[PORT:3000]
+slug: openspeedtest
+init: false
+ports:
+  3000/tcp: 3000
+  3001/tcp: null
+ports_description:
+  3000/tcp: HTTP
+  3001/tcp: HTTPS
