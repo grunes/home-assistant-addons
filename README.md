@@ -1,6 +1,6 @@
 # Home Assistant app repository by grunix
 
-This repository contanins multiple apps I have created for my HA-Green.
+This repository contanins multiple apps I have created for my HA Green.
 
 Apps documentation: <https://developers.home-assistant.io/docs/apps>
 
