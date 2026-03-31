@@ -15,6 +15,20 @@ Add-on documentation: <https://developers.home-assistant.io/docs/add-ons>
 
 _Relays Homematic IP (HMIP-HAP / HMIPW-DRAP) link-local multicast between the host network and OpenCCU running in a Docker container. Developed and tested on a Home Assistant Green. The image is currently built locally due to beta status._
 
+### [Open Speedtest](./openspeedtest)
+
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+
+_Run a self-hosted internet speed test UI inside Home Assistant. Uses the upstream Open Speedtest container image with a pinned version tag._
+
+### [DokuWiki](./dokuwiki)
+
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+
+_Run a self-hosted DokuWiki instance inside Home Assistant._
+
 ### [Example add-on](./example)
 
 ![Supports aarch64 Architecture][aarch64-shield]
