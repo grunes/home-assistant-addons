@@ -142,6 +142,7 @@ def relay(
 
             # Prevent loops: skip packets from our own send interface
             if src_addr == send_ip:
+                log.debug("%s: dropped loopback packet from %s:%d (%d bytes)", direction, src_addr, src_port, len(data))
                 continue
 
             send_sock.sendto(data, (group, port))
@@ -149,6 +150,11 @@ def relay(
 
             if pkt_count <= 5 or pkt_count % 100 == 0:
                 log.info(
+                    "%s: relayed %d bytes from %s:%d (total: %d)",
+                    direction, len(data), src_addr, src_port, pkt_count,
+                )
+            else:
+                log.debug(
                     "%s: relayed %d bytes from %s:%d (total: %d)",
                     direction, len(data), src_addr, src_port, pkt_count,
                 )
