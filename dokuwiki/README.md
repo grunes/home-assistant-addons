@@ -48,21 +48,6 @@ log_level: info
 
 All wiki data is stored in the add-on data directory and remains available after restarts and updates.
 
-## Security
-
-- Prefer running the add-on in a trusted network.
-- Use secure credentials if authentication is enabled.
-- Regularly check for updates to the add-on and Home Assistant.
-
-## Support
-
-If you encounter issues, please open an issue in the corresponding repository and include:
-
-- Add-on version
-- Home Assistant version
-- Relevant log excerpts
-- Reproduction steps
-
 ---
 
 **Note:** This is a community add-on and has no official affiliation with the DokuWiki developers.
