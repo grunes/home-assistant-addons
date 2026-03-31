@@ -1,21 +1,26 @@
-# Home Assistant app repository by grunix
+# Home Assistant Add-on Repository by grunix
 
-This repository contanins multiple apps I have created for my HA Green.
+This repository contains add-ons I have created for my Home Assistant Green.
 
-Apps documentation: <https://developers.home-assistant.io/docs/apps>
+Add-on documentation: <https://developers.home-assistant.io/docs/add-ons>
 
-[![Open your Home Assistant instance and show the app store with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/?repository_url=https%3A%2F%2Fgithub.com%2Fgrunes%2Fhome-assistant-addons)
+[![Open your Home Assistant instance and show the add-on store with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/?repository_url=https%3A%2F%2Fgithub.com%2Fgrunes%2Fhome-assistant-addons)
 
-## Apps
+## Add-ons
 
-This repository contains the following apps
-
-### [Example app](./example)
+### [OpenCCU Multicast Relay](./openccu-multicast-relay)
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
 
-_Example app to use as a blueprint for new apps._
+_Relays Homematic IP (HMIP-HAP / HMIPW-DRAP) link-local multicast between the host network and OpenCCU running in a Docker container. Developed and tested on a Home Assistant Green. The image is currently built locally due to beta status._
+
+### [Example add-on](./example)
+
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+
+_Example add-on to use as a blueprint for new add-ons._
 
 <!--
 

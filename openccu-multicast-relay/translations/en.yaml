@@ -2,15 +2,10 @@ configuration:
   multicast_groups:
     name: Multicast Groups
     description: >-
-      List of multicast group addresses to relay. Defaults include mDNS
-      (224.0.0.251), LLMNR (224.0.0.252), and SSDP/UPnP (239.255.255.250).
-      Add Homematic IP specific groups as needed.
-  relay_interfaces:
-    name: Additional Relay Interfaces
-    description: >-
-      Additional network interfaces to relay multicast traffic to/from.
-      Leave empty if you only need relay between the source and target
-      interface.
+      List of multicast group:port entries to relay (format: GROUP:PORT).
+      Defaults are 224.0.0.120:43438 (HMIP-HAP discovery) and
+      224.0.0.1:43439 (HMIPW-DRAP discovery). Use tcpdump to identify
+      additional groups your devices may need.
   source_interface:
     name: Source Interface
     description: >-
@@ -25,5 +20,5 @@ configuration:
   log_level:
     name: Log Level
     description: >-
-      Log verbosity. Set to 'debug' to see the generated smcroute
-      configuration and individual routed packets.
+      Log verbosity. Set to 'debug' to see individual relayed packets
+      and interface detection details.
